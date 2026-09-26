@@ -1,0 +1,14 @@
+name: ChatGPT Actions Runner Probe
+
+on:
+  push:
+    branches: [chatgpt-actions-probe-20260926]
+    paths:
+      - '.github/chatgpt-actions-probe.trigger'
+
+jobs:
+  probe:
+    runs-on: ubuntu-slim
+    timeout-minutes: 5
+    steps:
+      - run: echo RUNNER_PROBE_OK
