@@ -3,7 +3,7 @@ on:
   push:
     branches: [rcx-pb-gc-0001-lab]
     paths:
-      - 'research/rcx_pb_gc_0001/**'
+      - 'research/rcx_pb_gc_0001/cloud_qualify.py'
       - '.github/workflows/rcx_pb_gc_0001.yml'
   workflow_dispatch:
 permissions:
