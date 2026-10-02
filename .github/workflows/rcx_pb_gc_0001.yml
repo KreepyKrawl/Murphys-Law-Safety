@@ -1,0 +1,25 @@
+name: RCX-PB-GC-0001 Qualification
+on:
+  push:
+    branches: [rcx-pb-gc-0001-lab]
+    paths:
+      - 'research/rcx_pb_gc_0001/**'
+      - '.github/workflows/rcx_pb_gc_0001.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run frozen corpus qualification
+        run: python research/rcx_pb_gc_0001/cloud_qualify.py
+      - name: Upload qualification artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: rcx-pb-gc-0001-qualification
+          path: artifact/
+          if-no-files-found: error
+          retention-days: 30
