@@ -1,4 +1,4 @@
-name: RCX-PB-GC-0001 Qualification
+name: RCX-PB-GC-0001 Qualification v0.3
 on:
   push:
     branches: [rcx-pb-gc-0001-lab]
@@ -11,15 +11,22 @@ permissions:
 jobs:
   qualify:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - name: Run frozen corpus qualification
         run: python research/rcx_pb_gc_0001/cloud_qualify.py
-      - name: Upload qualification artifact
+      - name: Upload safe qualification artifact
         uses: actions/upload-artifact@v4
         with:
-          name: rcx-pb-gc-0001-qualification
+          name: rcx-pb-gc-0001-qualification-safe
           path: artifact/
+          if-no-files-found: error
+          retention-days: 30
+      - name: Preserve source/sealed vault separately
+        uses: actions/upload-artifact@v4
+        with:
+          name: rcx-pb-gc-0001-source-vault
+          path: vault/
           if-no-files-found: error
           retention-days: 30
